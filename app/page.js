@@ -22,7 +22,7 @@ export default function Home() {
       </p>
       <div className="flex flex-wrap justify-center gap-4">
         <a
-          href="/cv.pdf"
+          href="my-cv.docx"
           className="px-6 py-3 bg-blue-600 text-white font-semibold rounded-full shadow hover:bg-blue-700 transition"
         >
           📄 Download CV
