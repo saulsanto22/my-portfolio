@@ -1,51 +1,84 @@
+// File: app/projects/page.js
+'use client'
+
+import {
+  SiLaravel,
+  SiLumen,
+  SiMysql,
+  SiPostgresql,
+  SiMinio
+} from 'react-icons/si'
+import { FaProjectDiagram } from 'react-icons/fa'
+
 const projects = [
   {
-    name: 'Sistem Registrasi Klien',
-    desc: 'CRUD registrasi klien dengan role management dan file upload',
-    tech: 'Laravel, MySQL, MinIO',
-    link: 'https://github.com/yourusername/registrasi-klien',
+    title: 'Lelang Go Id',
+    description:
+      'Lelang.go.id is an online platform managed by the government (DJKN - Ministry of Finance) to facilitate online auctions. It enables participants to join the bidding process remotely.',
+    tech: ['Laravel', 'Lumen', 'MySQL', 'PostgreSQL', 'MinIO'],
+    status: 'Production'
   },
   {
-    name: 'REST API Surat Izin',
-    desc: 'Manajemen izin luar negeri dengan validasi dan lampiran dokumen',
-    tech: 'Laravel, Lumen, Redis',
-    link: 'https://github.com/yourusername/surat-izin-api',
+    title: 'e-LHKPN',
+    description:
+      'e-LHKPN is a digital reporting system for state officials\' assets to the KPK. It simplifies and streamlines the process, making it more efficient and transparent.',
+    tech: ['Laravel', 'Lumen', 'MySQL', 'PostgreSQL', 'MinIO'],
+    status: 'Production'
   },
   {
-    name: 'Sistem Wajib Lapor',
-    desc: 'Melayani pemanggilan dan kehadiran klien dengan surat panggilan dan integrasi MinIO',
-    tech: 'Laravel, Redis, MinIO',
-    link: 'https://github.com/yourusername/wajib-lapor',
-  },
+    title: 'SDP - Sistem Database Pemasyarakatan',
+    description:
+      'SDP is a national-level system for managing Correctional Inmate (WBP) data, helping UPT, KANWIL, and DITJENPAS efficiently track and report inmate information.',
+    tech: ['Laravel', 'Lumen', 'MySQL', 'PostgreSQL', 'MinIO'],
+    status: 'Production'
+  }
 ]
 
-export default function Projects() {
+const techIcons = {
+  Laravel: <SiLaravel className="text-red-600" title="Laravel" />,
+  Lumen: <SiLumen className="text-orange-600" title="Lumen" />,
+  MySQL: <SiMysql className="text-blue-600" title="MySQL" />,
+  PostgreSQL: <SiPostgresql className="text-indigo-600" title="PostgreSQL" />,
+  MinIO: <SiMinio className="text-yellow-500" title="MinIO" />
+}
+
+export default function ProjectsPage() {
   return (
-    <div
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
-      role="region"
-    >
-      <h2 className="text-2xl font-bold mb-6 text-center">Projects</h2>
-      <div className="grid gap-6 md:grid-cols-2">
-        {projects.map((project, i) => (
+    <section className="min-h-screen py-20 px-6">
+      <div className="max-w-4xl mx-auto space-y-12">
+         <h2 className="text-4xl font-extrabold mb-8 text-center flex items-center justify-center gap-3 text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-teal-400 dark:from-cyan-400 dark:to-blue-400">
+          <FaProjectDiagram className="text-blue-600 dark:text-cyan-400" /> My Projects
+        </h2>
+
+        {projects.map((project, index) => (
           <div
-            key={project.name}
-            initial={{ opacity: 0, y: 30 }}
-            // whileInView={{ opacity: 1, y: 0 }}
-             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: i * 0.2 }}
-            viewport={{ once: true }}
-            className="p-4 border rounded-lg shadow hover:shadow-md transition bg-white"
+            key={index}
+            className="p-6 border border-gray-200 dark:border-gray-700 rounded-xl shadow-md bg-white dark:bg-gray-800 hover:shadow-xl transition-shadow duration-300"
           >
-            <h3 className="text-xl font-semibold mb-1">{project.name}</h3>
-            <p className="text-sm mb-2 text-gray-700">{project.desc}</p>
-            <p className="text-xs text-gray-500 mb-2">Stack: {project.tech}</p>
-            <a href={project.link} target="_blank" className="text-blue-600 underline">Lihat GitHub →</a>
+            <div className="flex items-center justify-between mb-2">
+              <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
+                {project.title}
+              </h3>
+              <span
+                className={`text-sm px-3 py-1 rounded-full font-medium ${project.status === 'Production'
+                    ? 'bg-green-100 text-green-700 dark:bg-green-800 dark:text-green-100'
+                    : 'bg-yellow-100 text-yellow-700 dark:bg-yellow-800 dark:text-yellow-100'
+                  }`}
+              >
+                {project.status}
+              </span>
+            </div>
+            <p className="text-gray-700 dark:text-gray-300 text-base mb-4">
+              {project.description}
+            </p>
+            <div className="flex flex-wrap gap-3 text-2xl">
+              {project.tech.map((tech, idx) => (
+                <div key={idx}>{techIcons[tech]}</div>
+              ))}
+            </div>
           </div>
         ))}
       </div>
-    </div>
+    </section>
   )
 }
