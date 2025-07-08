@@ -45,22 +45,26 @@ const techIcons = {
 export default function ProjectsPage() {
   return (
     <section className="min-h-screen py-20 px-6">
-      <div className="max-w-4xl mx-auto space-y-12">
-         <h2 className="text-4xl font-extrabold mb-8 text-center flex items-center justify-center gap-3 text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-teal-400 dark:from-cyan-400 dark:to-blue-400">
-          <FaProjectDiagram className="text-blue-600 dark:text-cyan-400" /> My Projects
+      <div className="max-w-4xl mx-auto space-y-12 animate-fade-in">
+
+        {/* Title */}
+        <h2 className="text-4xl font-extrabold mb-8 text-center flex items-center justify-center gap-3 text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-teal-400 dark:from-cyan-400 dark:to-blue-400 drop-shadow-md">
+          <FaProjectDiagram className="text-blue-600 dark:text-cyan-400" />
+          My Projects
         </h2>
 
+        {/* Project List */}
         {projects.map((project, index) => (
           <div
             key={index}
             className="p-6 border border-gray-200 dark:border-gray-700 rounded-xl shadow-md bg-white dark:bg-gray-800 hover:shadow-xl transition-shadow duration-300"
           >
-            <div className="flex items-center justify-between mb-2">
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
+            <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-2 gap-2">
+              <h3 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white break-words">
                 {project.title}
               </h3>
               <span
-                className={`text-sm px-3 py-1 rounded-full font-medium ${project.status === 'Production'
+                className={`text-sm px-3 py-1 rounded-full font-medium whitespace-nowrap ${project.status === 'Production'
                     ? 'bg-green-100 text-green-700 dark:bg-green-800 dark:text-green-100'
                     : 'bg-yellow-100 text-yellow-700 dark:bg-yellow-800 dark:text-yellow-100'
                   }`}
@@ -68,9 +72,11 @@ export default function ProjectsPage() {
                 {project.status}
               </span>
             </div>
-            <p className="text-gray-700 dark:text-gray-300 text-base mb-4">
+
+            <p className="text-gray-700 dark:text-gray-300 text-base mb-4 leading-relaxed">
               {project.description}
             </p>
+
             <div className="flex flex-wrap gap-3 text-2xl">
               {project.tech.map((tech, idx) => (
                 <div key={idx}>{techIcons[tech]}</div>
