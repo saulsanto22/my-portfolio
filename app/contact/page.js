@@ -19,16 +19,16 @@ export default function ContactPage() {
           Let&apos;s connect! I&apos;d love to hear from you — whether it&apos;s about a project, opportunity, or just to say hi.
         </p>
 
-        <div className="flex flex-col md:flex-row justify-center items-center gap-6 text-lg">
+       <div className="flex flex-col gap-4 md:grid md:grid-cols-1 lg:grid-cols-3 justify-center items-stretch text-lg">
           {/* WhatsApp */}
           <a
             href="https://wa.me/62882000978708"
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex items-center gap-4 px-6 py-4 rounded-2xl bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-300 hover:scale-105 hover:shadow-xl transition-all duration-300"
+            className="group flex items-center justify-center gap-4 px-6 py-4 rounded-2xl bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-300 hover:scale-105 hover:shadow-xl transition-all duration-300 w-full"
           >
             <FaWhatsapp className="text-3xl group-hover:animate-bounce" />
-            <span className="font-semibold"></span>
+            <span className="font-semibold text-center"></span>
           </a>
 
           {/* LinkedIn */}
@@ -36,19 +36,19 @@ export default function ContactPage() {
             href="https://id.linkedin.com/in/saul-santo-anju-5269081a7"
             target="_blank"
             rel="noopener noreferrer"
-            className="group flex items-center gap-4 px-6 py-4 rounded-2xl bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-300 hover:scale-105 hover:shadow-xl transition-all duration-300"
+            className="group flex items-center justify-center gap-4 px-6 py-4 rounded-2xl bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-300 hover:scale-105 hover:shadow-xl transition-all duration-300 w-full"
           >
             <FaLinkedin className="text-3xl group-hover:animate-bounce" />
-            <span className="font-semibold"></span>
+            <span className="font-semibold text-center"></span>
           </a>
 
           {/* Email */}
           <a
             href="mailto:saul.santoa@gmail.com"
-            className="group flex items-center gap-4 px-6 py-4 rounded-2xl bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 hover:scale-105 hover:shadow-xl transition-all duration-300"
+            className="group flex items-center justify-center gap-4 px-6 py-4 rounded-2xl bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 hover:scale-105 hover:shadow-xl transition-all duration-300 w-full"
           >
             <FaEnvelope className="text-3xl group-hover:animate-ping" />
-            <span className="font-semibold"></span>
+            <span className="font-semibold text-center"></span>
           </a>
         </div>
       </div>
