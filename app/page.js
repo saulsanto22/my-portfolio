@@ -17,7 +17,7 @@ export default function Home() {
 
       {/* Nama dan Posisi */}
       <h1 className="text-4xl sm:text-5xl font-bold tracking-tight mb-4 bg-gradient-to-r from-blue-600 via-cyan-500 to-teal-400 text-transparent bg-clip-text">
-        Hi, I'm Saul Santo Anju 👋
+        Hi, I&apos;m Saul Santo Anju
       </h1>
 
       <p className="text-lg sm:text-xl text-gray-600 dark:text-gray-300 max-w-xl mb-8">
