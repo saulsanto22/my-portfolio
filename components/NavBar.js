@@ -28,9 +28,8 @@ export default function Navbar() {
             <Link
               key={path}
               href={path}
-              className={`relative hover:text-blue-600 dark:hover:text-cyan-400 transition ${
-                pathname === path ? 'text-blue-600 dark:text-cyan-400 font-semibold' : ''
-              }`}
+              className={`relative hover:text-blue-600 dark:hover:text-cyan-400 transition ${pathname === path ? 'text-blue-600 dark:text-cyan-400 font-semibold' : ''
+                }`}
             >
               {label}
               {pathname === path && (
@@ -71,9 +70,8 @@ export default function Navbar() {
                 key={path}
                 href={path}
                 onClick={() => setMobileMenuOpen(false)}
-                className={`py-1 px-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 ${
-                  pathname === path ? 'bg-gray-100 dark:bg-gray-800 font-semibold text-blue-600 dark:text-cyan-400' : ''
-                }`}
+                className={`py-1 px-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 ${pathname === path ? 'bg-gray-100 dark:bg-gray-800 font-semibold text-blue-600 dark:text-cyan-400' : ''
+                  }`}
               >
                 {label}
               </Link>

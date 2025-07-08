@@ -41,7 +41,7 @@ export default function Home() {
           💻 GitHub
         </a>
         <a
-          href="https://linkedin.com/in/yourusername"
+          href="https://id.linkedin.com/in/saul-santo-anju-5269081a7"
           target="_blank"
           rel="noopener noreferrer"
           className="px-6 py-3 border border-blue-600 text-blue-600 font-semibold rounded-full hover:bg-blue-50 dark:border-blue-400 dark:text-blue-400 dark:hover:bg-blue-900/10 transition"
