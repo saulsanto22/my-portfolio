@@ -2,11 +2,28 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 export default function Navbar() {
   const pathname = usePathname()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [isDark, setIsDark] = useState(false)
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme')
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const shouldBeDark = savedTheme ? savedTheme === 'dark' : prefersDark
+
+    document.documentElement.classList.toggle('dark', shouldBeDark)
+    setIsDark(shouldBeDark)
+  }, [])
+
+  const toggleDarkMode = () => {
+    const nextDark = !document.documentElement.classList.contains('dark')
+    document.documentElement.classList.toggle('dark', nextDark)
+    localStorage.setItem('theme', nextDark ? 'dark' : 'light')
+    setIsDark(nextDark)
+  }
 
   const navItems = [
     { label: 'Home', path: '/' },
@@ -16,8 +33,8 @@ export default function Navbar() {
   ]
 
   return (
-    <header className="absolute top-0 left-0 w-full z-50">
-      <div className="max-w-6xl mx-auto px-4 py-5 flex justify-between items-center">
+    <header className="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-white/75 dark:bg-gray-900/75 border-b border-gray-200/60 dark:border-gray-800/60 transition-colors duration-300">
+      <div className="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
         <Link href="/" className="text-2xl font-extrabold tracking-tight bg-gradient-to-r from-blue-600 via-cyan-500 to-teal-400 bg-clip-text text-transparent">
           Saul Santo Anju
         </Link>
@@ -38,23 +55,26 @@ export default function Navbar() {
             </Link>
           ))}
           <button
-            onClick={() => document.documentElement.classList.toggle('dark')}
+            onClick={toggleDarkMode}
+            aria-label="Toggle dark mode"
             className="ml-4 px-2 py-1 rounded-md border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-800 transition text-sm"
           >
-            🌓
+            {isDark ? '☀️' : '🌙'}
           </button>
         </nav>
 
         {/* Mobile */}
         <div className="md:hidden flex items-center gap-2">
           <button
-            onClick={() => document.documentElement.classList.toggle('dark')}
+            onClick={toggleDarkMode}
+            aria-label="Toggle dark mode"
             className="p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-800 transition"
           >
-            🌓
+            {isDark ? '☀️' : '🌙'}
           </button>
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle navigation menu"
             className="text-xl font-bold"
           >
             {mobileMenuOpen ? '✕' : '☰'}
