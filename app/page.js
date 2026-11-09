@@ -113,8 +113,8 @@ export default function Home() {
           <FaArrowRight className="text-sm" />
         </Link>
         <a
-          href="/my-cv.docx"
-          download
+          href="/Saul Santo Anju Lumban Raja.pdf"
+          download="Saul_Santo_Anju_CV.pdf"
           className="inline-flex items-center gap-2 px-6 py-3.5 bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100 border border-slate-300 dark:border-slate-700 font-semibold rounded-full shadow-sm hover:border-blue-500 dark:hover:border-cyan-400 hover:-translate-y-0.5 transition-all"
         >
           <FaDownload className="text-sm text-blue-600 dark:text-cyan-400" />
