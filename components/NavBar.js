@@ -3,16 +3,16 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useEffect, useState } from 'react'
+import { FaSun, FaMoon } from 'react-icons/fa'
 
 export default function Navbar() {
   const pathname = usePathname()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [isDark, setIsDark] = useState(false)
+  const [isDark, setIsDark] = useState(true)
 
   useEffect(() => {
     const savedTheme = localStorage.getItem('theme')
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches
-    const shouldBeDark = savedTheme ? savedTheme === 'dark' : prefersDark
+    const shouldBeDark = savedTheme ? savedTheme === 'dark' : true
 
     document.documentElement.classList.toggle('dark', shouldBeDark)
     setIsDark(shouldBeDark)
@@ -33,33 +33,44 @@ export default function Navbar() {
   ]
 
   return (
-    <header className="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-white/75 dark:bg-gray-900/75 border-b border-gray-200/60 dark:border-gray-800/60 transition-colors duration-300">
-      <div className="max-w-5xl mx-auto px-6 py-4 flex justify-between items-center">
-        <Link href="/" className="text-2xl font-extrabold tracking-tight bg-gradient-to-r from-blue-600 via-cyan-500 to-teal-400 bg-clip-text text-transparent">
-          Saul Santo Anju
+    <header className="fixed top-0 left-0 w-full z-50 backdrop-blur-xl bg-white/80 dark:bg-slate-950/80 border-b border-slate-200/70 dark:border-slate-800/80 transition-colors duration-300">
+      <div className="max-w-5xl mx-auto px-6 py-3.5 flex justify-between items-center">
+        <Link href="/" className="group flex items-center gap-2.5">
+          <span className="w-8 h-8 rounded-lg bg-gradient-to-br from-blue-600 to-cyan-500 flex items-center justify-center text-white font-extrabold text-sm shadow-md shadow-blue-500/20 group-hover:scale-105 transition-transform">
+            S
+          </span>
+          <span className="text-lg sm:text-xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+            Saul Santo<span className="text-blue-600 dark:text-cyan-400">.</span>
+          </span>
         </Link>
 
         {/* Desktop Menu */}
-        <nav className="hidden md:flex gap-6 items-center text-sm font-medium text-gray-800 dark:text-gray-100">
-          {navItems.map(({ label, path }) => (
-            <Link
-              key={path}
-              href={path}
-              className={`relative hover:text-blue-600 dark:hover:text-cyan-400 transition ${pathname === path ? 'text-blue-600 dark:text-cyan-400 font-semibold' : ''
-                }`}
-            >
-              {label}
-              {pathname === path && (
-                <span className="absolute left-0 -bottom-1 w-full h-0.5 bg-blue-600 dark:bg-cyan-400 rounded-full"></span>
-              )}
-            </Link>
-          ))}
+        <nav className="hidden md:flex gap-1.5 items-center text-sm font-medium">
+          <div className="flex items-center gap-1 p-1 rounded-full bg-slate-100/80 dark:bg-slate-900/90 border border-slate-200/70 dark:border-slate-800">
+            {navItems.map(({ label, path }) => {
+              const isActive = pathname === path
+              return (
+                <Link
+                  key={path}
+                  href={path}
+                  className={`px-4 py-1.5 rounded-full transition-all duration-200 ${
+                    isActive
+                      ? 'bg-white dark:bg-slate-800 text-blue-600 dark:text-cyan-400 font-semibold shadow-sm'
+                      : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white'
+                  }`}
+                >
+                  {label}
+                </Link>
+              )
+            })}
+          </div>
+
           <button
             onClick={toggleDarkMode}
             aria-label="Toggle dark mode"
-            className="ml-4 px-2 py-1 rounded-md border border-gray-300 dark:border-gray-600 hover:bg-gray-100 dark:hover:bg-gray-800 transition text-sm"
+            className="ml-3 p-2.5 rounded-full bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 hover:border-blue-400 dark:hover:border-cyan-500 transition"
           >
-            {isDark ? '☀️' : '🌙'}
+            {isDark ? <FaSun className="text-amber-400" /> : <FaMoon className="text-slate-600" />}
           </button>
         </nav>
 
@@ -68,14 +79,14 @@ export default function Navbar() {
           <button
             onClick={toggleDarkMode}
             aria-label="Toggle dark mode"
-            className="p-2 rounded-md hover:bg-gray-200 dark:hover:bg-gray-800 transition"
+            className="p-2.5 rounded-full bg-slate-100 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-700 dark:text-slate-300 transition"
           >
-            {isDark ? '☀️' : '🌙'}
+            {isDark ? <FaSun className="text-amber-400" /> : <FaMoon className="text-slate-600" />}
           </button>
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle navigation menu"
-            className="text-xl font-bold"
+            className="p-2 rounded-lg text-slate-800 dark:text-slate-200 text-xl font-bold"
           >
             {mobileMenuOpen ? '✕' : '☰'}
           </button>
@@ -83,15 +94,18 @@ export default function Navbar() {
       </div>
 
       {mobileMenuOpen && (
-        <div className="md:hidden bg-white dark:bg-gray-900 py-2 px-4 border-t border-gray-200 dark:border-gray-700">
-          <nav className="flex flex-col gap-3 text-sm">
+        <div className="md:hidden bg-white/95 dark:bg-slate-950/95 backdrop-blur-xl py-3 px-6 border-t border-slate-200 dark:border-slate-800">
+          <nav className="flex flex-col gap-1.5 text-sm">
             {navItems.map(({ label, path }) => (
               <Link
                 key={path}
                 href={path}
                 onClick={() => setMobileMenuOpen(false)}
-                className={`py-1 px-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-800 ${pathname === path ? 'bg-gray-100 dark:bg-gray-800 font-semibold text-blue-600 dark:text-cyan-400' : ''
-                  }`}
+                className={`py-2 px-3 rounded-xl transition ${
+                  pathname === path
+                    ? 'bg-blue-50 dark:bg-slate-900 font-semibold text-blue-600 dark:text-cyan-400'
+                    : 'text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-900'
+                }`}
               >
                 {label}
               </Link>

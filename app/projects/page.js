@@ -28,6 +28,20 @@ import classNames from 'classnames'
 
 const enterpriseProjects = [
   {
+    title: 'SISARPRAS — LRT Jakarta (IBM Maximo Integration)',
+    organization: 'PT LRT Jakarta (via PT Adhivasindo)',
+    role: 'Backend Developer',
+    description:
+      'Sistem Informasi Sarana dan Prasarana (SISARPRAS) for LRT Jakarta—an enterprise facility and railway infrastructure management system focused on seamless integration with IBM Maximo Enterprise Asset Management (EAM).',
+    highlights: [
+      'Developed core backend RESTful APIs for managing LRT Jakarta railway facilities and infrastructure assets (Sarana & Prasarana).',
+      'Engineered seamless data synchronization and API integration pipelines with IBM Maximo EAM for asset tracking, maintenance, and work orders.',
+      'Designed reliable relational database schemas and validation workflows for public transit operational accuracy.'
+    ],
+    tech: ['Laravel', 'MySQL', 'PostgreSQL', 'Postman'],
+    status: 'Production'
+  },
+  {
     title: 'Lelang.go.id (Portal Lelang Indonesia)',
     organization: 'DJKN — Ministry of Finance RI (via Torche Indonesia)',
     role: 'Backend Web Developer',
@@ -171,12 +185,22 @@ function ProjectCard({ project, onSelect }) {
   return (
     <div
       onClick={() => onSelect(project)}
-      className="cursor-pointer p-6 border border-gray-200 dark:border-gray-700 rounded-2xl shadow-sm bg-white dark:bg-gray-800 hover:shadow-xl hover:-translate-y-0.5 transition-all duration-300 flex flex-col justify-between"
+      className="group relative overflow-hidden cursor-pointer p-6 rounded-2xl bg-white/80 dark:bg-slate-900/75 backdrop-blur-md border border-slate-200/80 dark:border-slate-800/90 shadow-sm hover:shadow-xl hover:border-blue-500/40 dark:hover:border-cyan-500/40 hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between"
     >
+      {/* Top Gradient Accent Bar */}
+      <div
+        className={classNames(
+          'absolute top-0 left-0 w-full h-1',
+          isProduction
+            ? 'bg-gradient-to-r from-emerald-500 via-teal-500 to-cyan-500'
+            : 'bg-gradient-to-r from-blue-600 via-indigo-500 to-cyan-400'
+        )}
+      />
+
       <div>
-        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-2 gap-2">
+        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between mb-2 gap-2 pt-1">
           <div>
-            <h4 className="text-xl font-bold text-gray-900 dark:text-white break-words">
+            <h4 className="text-xl font-bold text-slate-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-cyan-400 transition-colors break-words">
               {project.title}
             </h4>
             <p className="text-xs sm:text-sm font-medium text-blue-600 dark:text-cyan-400 mt-0.5">
@@ -185,29 +209,43 @@ function ProjectCard({ project, onSelect }) {
           </div>
           <span
             className={classNames(
-              'self-start text-xs px-3 py-1 rounded-full font-semibold whitespace-nowrap',
+              'self-start text-xs px-3 py-1 rounded-full font-semibold whitespace-nowrap border',
               isProduction
-                ? 'bg-green-100 text-green-700 dark:bg-green-900/60 dark:text-green-200'
-                : 'bg-blue-100 text-blue-700 dark:bg-blue-900/60 dark:text-blue-200'
+                ? 'bg-emerald-500/10 text-emerald-700 border-emerald-500/20 dark:text-emerald-300'
+                : 'bg-blue-500/10 text-blue-700 border-blue-500/20 dark:text-cyan-300'
             )}
           >
             {project.status}
           </span>
         </div>
 
-        <p className="text-gray-700 dark:text-gray-300 text-sm sm:text-base line-clamp-2 mt-3">
+        <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base line-clamp-2 mt-3 leading-relaxed">
           {project.description}
         </p>
+
+        {project.highlights && (
+          <ul className="mt-4 space-y-1.5">
+            {project.highlights.slice(0, 2).map((point, idx) => (
+              <li
+                key={idx}
+                className="flex items-start gap-2 text-xs sm:text-sm text-slate-500 dark:text-slate-400 line-clamp-1"
+              >
+                <FaCheckCircle className="text-emerald-500 dark:text-teal-400 mt-1 shrink-0 text-xs" />
+                <span className="truncate">{point}</span>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
 
-      <div className="flex items-center justify-between gap-4 mt-5 pt-4 border-t border-gray-100 dark:border-gray-700/60">
-        <div className="flex flex-wrap gap-2.5 text-xl">
+      <div className="flex items-center justify-between gap-4 mt-6 pt-4 border-t border-slate-100 dark:border-slate-800/80">
+        <div className="flex flex-wrap gap-2">
           {project.tech.map((tech) => (
             <span
               key={tech}
-              className="inline-flex items-center gap-1.5 text-xs font-medium px-2.5 py-1 rounded-lg bg-gray-100 dark:bg-gray-700/70 text-gray-700 dark:text-gray-200"
+              className="inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 border border-slate-200/60 dark:border-slate-700/60"
             >
-              <span className="text-base">{techIcons[tech]}</span>
+              <span className="text-sm">{techIcons[tech]}</span>
               <span>{tech}</span>
             </span>
           ))}
@@ -219,14 +257,14 @@ function ProjectCard({ project, onSelect }) {
             target="_blank"
             rel="noopener noreferrer"
             onClick={(e) => e.stopPropagation()}
-            className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold text-gray-700 dark:text-gray-200 hover:text-blue-600 dark:hover:text-cyan-400 whitespace-nowrap"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900 dark:bg-slate-800 text-white text-xs font-semibold hover:bg-blue-600 dark:hover:bg-cyan-600 transition whitespace-nowrap"
           >
-            <FaGithub className="text-base" />
+            <FaGithub className="text-sm" />
             <span>GitHub</span>
           </a>
         ) : (
-          <span className="text-xs font-medium text-blue-600 dark:text-cyan-400 whitespace-nowrap">
-            View details →
+          <span className="text-xs font-semibold text-blue-600 dark:text-cyan-400 whitespace-nowrap group-hover:translate-x-0.5 transition-transform">
+            Details →
           </span>
         )}
       </div>
@@ -236,85 +274,124 @@ function ProjectCard({ project, onSelect }) {
 
 export default function ProjectsPage() {
   const [selectedProject, setSelectedProject] = useState(null)
+  const [activeFilter, setActiveFilter] = useState('all')
+
+  const filterTabs = [
+    { id: 'all', label: 'All Projects (9)' },
+    { id: 'enterprise', label: 'Enterprise & Gov (4)' },
+    { id: 'personal', label: 'Architecture & Open Source (5)' }
+  ]
 
   return (
-    <section className="py-12">
-      <div className="max-w-4xl mx-auto space-y-14 animate-fade-in">
-        {/* Header */}
-        <div className="text-center space-y-3">
-          <h2 className="text-4xl font-extrabold flex items-center justify-center gap-3 text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-teal-400 dark:from-cyan-400 dark:to-blue-400 drop-shadow-sm">
-            <FaProjectDiagram className="text-blue-600 dark:text-cyan-400" />
-            My Projects
+    <section className="py-6">
+      <div className="max-w-5xl mx-auto space-y-12 animate-fade-in">
+        {/* Header & Filter Bar */}
+        <div className="text-center space-y-4">
+          <div className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-blue-600 dark:text-cyan-400">
+            <FaProjectDiagram />
+            <span>Portfolio &amp; Case Studies</span>
+          </div>
+          <h2 className="text-3xl sm:text-5xl font-extrabold text-slate-900 dark:text-white">
+            Featured{' '}
+            <span className="bg-gradient-to-r from-blue-600 via-cyan-500 to-teal-400 text-transparent bg-clip-text">
+              Backend Projects
+            </span>
           </h2>
-          <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            A showcase of national-scale enterprise platforms I contributed to professionally, along with personal backend API projects on GitHub.
+          <p className="text-slate-600 dark:text-slate-300 max-w-2xl mx-auto text-sm sm:text-base">
+            National-scale government systems developed professionally alongside self-initiated polyglot microservices and financial ledger engines.
           </p>
+
+          {/* Interactive Filter Tabs */}
+          <div className="pt-2 flex flex-wrap justify-center gap-2">
+            {filterTabs.map((tab) => (
+              <button
+                key={tab.id}
+                onClick={() => setActiveFilter(tab.id)}
+                className={classNames(
+                  'px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all',
+                  activeFilter === tab.id
+                    ? 'bg-blue-600 text-white shadow-md shadow-blue-500/25'
+                    : 'bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 border border-slate-200 dark:border-slate-800 hover:border-blue-400'
+                )}
+              >
+                {tab.label}
+              </button>
+            ))}
+          </div>
         </div>
 
         {/* Section 1: Featured Enterprise Projects */}
-        <div className="space-y-6">
-          <div className="flex items-center gap-2.5 border-b border-gray-200 dark:border-gray-700 pb-3">
-            <FaBuilding className="text-xl text-blue-600 dark:text-cyan-400" />
-            <div>
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
-                Featured Enterprise Projects
-              </h3>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
-                National-scale government platforms developed during my tenure at Torche Indonesia
-              </p>
+        {(activeFilter === 'all' || activeFilter === 'enterprise') && (
+          <div className="space-y-6">
+            <div className="flex items-center gap-3 border-b border-slate-200 dark:border-slate-800 pb-3">
+              <div className="p-2.5 rounded-xl bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
+                <FaBuilding className="text-xl" />
+              </div>
+              <div>
+                <h3 className="text-2xl font-bold text-slate-900 dark:text-white">
+                  Featured Enterprise Projects
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+                  Public transit &amp; national-scale government platforms developed at PT Adhivasindo and Torche Indonesia
+                </p>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 gap-6">
+              {enterpriseProjects.map((project) => (
+                <ProjectCard
+                  key={project.title}
+                  project={project}
+                  onSelect={setSelectedProject}
+                />
+              ))}
             </div>
           </div>
-
-          <div className="grid grid-cols-1 gap-6">
-            {enterpriseProjects.map((project) => (
-              <ProjectCard
-                key={project.title}
-                project={project}
-                onSelect={setSelectedProject}
-              />
-            ))}
-          </div>
-        </div>
+        )}
 
         {/* Section 2: Personal & Open Source Projects */}
-        <div className="space-y-6">
-          <div className="flex items-center gap-2.5 border-b border-gray-200 dark:border-gray-700 pb-3">
-            <FaCodeBranch className="text-xl text-teal-600 dark:text-teal-400" />
-            <div>
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
-                Personal &amp; Open Source Projects
-              </h3>
-              <p className="text-sm text-gray-500 dark:text-gray-400">
-                Self-initiated backend APIs, payment integrations, and architecture explorations
-              </p>
+        {(activeFilter === 'all' || activeFilter === 'personal') && (
+          <div className="space-y-6">
+            <div className="flex items-center gap-3 border-b border-slate-200 dark:border-slate-800 pb-3">
+              <div className="p-2.5 rounded-xl bg-blue-500/10 text-blue-600 dark:text-cyan-400">
+                <FaCodeBranch className="text-xl" />
+              </div>
+              <div>
+                <h3 className="text-2xl font-bold text-slate-900 dark:text-white">
+                  Personal &amp; Open Source Projects
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-500 dark:text-slate-400">
+                  Polyglot microservices, high-concurrency wallet engines, and RESTful API integrations
+                </p>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {personalProjects.map((project) => (
+                <ProjectCard
+                  key={project.title}
+                  project={project}
+                  onSelect={setSelectedProject}
+                />
+              ))}
             </div>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {personalProjects.map((project) => (
-              <ProjectCard
-                key={project.title}
-                project={project}
-                onSelect={setSelectedProject}
-              />
-            ))}
-          </div>
-        </div>
+        )}
       </div>
 
       {/* Modal Detail Project */}
       {selectedProject && (
         <div
-          className="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+          className="fixed inset-0 bg-slate-950/70 backdrop-blur-sm z-50 flex items-center justify-center p-4"
           onClick={() => setSelectedProject(null)}
         >
           <div
-            className="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-xl w-full p-6 sm:p-8 relative border border-gray-200 dark:border-gray-700"
+            className="bg-white dark:bg-slate-900 rounded-2xl shadow-2xl max-w-xl w-full p-6 sm:p-8 relative border border-slate-200 dark:border-slate-800 animate-fade-in"
             onClick={(e) => e.stopPropagation()}
           >
             <button
               aria-label="Close modal"
-              className="absolute top-4 right-4 text-gray-400 hover:text-red-500 text-xl transition"
+              className="absolute top-4 right-4 p-2 rounded-full text-slate-400 hover:text-red-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition"
               onClick={() => setSelectedProject(null)}
             >
               <FaTimes />
@@ -325,13 +402,13 @@ export default function ProjectsPage() {
                 className={classNames(
                   'inline-block text-xs px-3 py-1 rounded-full font-semibold mb-2',
                   selectedProject.status === 'Production'
-                    ? 'bg-green-100 text-green-700 dark:bg-green-900/60 dark:text-green-200'
-                    : 'bg-blue-100 text-blue-700 dark:bg-blue-900/60 dark:text-blue-200'
+                    ? 'bg-emerald-500/10 text-emerald-700 dark:text-emerald-300'
+                    : 'bg-blue-500/10 text-blue-700 dark:text-cyan-300'
                 )}
               >
                 {selectedProject.status}
               </span>
-              <h3 className="text-2xl font-bold text-gray-900 dark:text-white">
+              <h3 className="text-2xl font-bold text-slate-900 dark:text-white">
                 {selectedProject.title}
               </h3>
               <p className="text-sm font-medium text-blue-600 dark:text-cyan-400 mt-1">
@@ -339,22 +416,22 @@ export default function ProjectsPage() {
               </p>
             </div>
 
-            <p className="text-gray-700 dark:text-gray-300 text-sm sm:text-base mb-5 leading-relaxed">
+            <p className="text-slate-600 dark:text-slate-300 text-sm sm:text-base mb-5 leading-relaxed">
               {selectedProject.description}
             </p>
 
             {selectedProject.highlights && (
               <div className="mb-6">
-                <h4 className="text-sm font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2.5">
-                  Key Contributions &amp; Features
+                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">
+                  Key Contributions &amp; Architecture Highlights
                 </h4>
-                <ul className="space-y-2">
+                <ul className="space-y-2.5">
                   {selectedProject.highlights.map((point, idx) => (
                     <li
                       key={idx}
-                      className="flex items-start gap-2.5 text-sm text-gray-700 dark:text-gray-300"
+                      className="flex items-start gap-2.5 text-sm text-slate-700 dark:text-slate-300"
                     >
-                      <FaCheckCircle className="text-green-500 dark:text-teal-400 mt-1 shrink-0" />
+                      <FaCheckCircle className="text-emerald-500 dark:text-teal-400 mt-1 shrink-0" />
                       <span>{point}</span>
                     </li>
                   ))}
@@ -363,14 +440,14 @@ export default function ProjectsPage() {
             )}
 
             <div className="mb-6">
-              <h4 className="text-sm font-bold uppercase tracking-wider text-gray-500 dark:text-gray-400 mb-2.5">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2.5">
                 Technologies Used
               </h4>
               <div className="flex flex-wrap gap-2">
                 {selectedProject.tech.map((tech) => (
                   <span
                     key={tech}
-                    className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200"
+                    className="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-800 dark:text-slate-200"
                   >
                     <span className="text-base">{techIcons[tech]}</span>
                     <span>{tech}</span>
@@ -380,12 +457,12 @@ export default function ProjectsPage() {
             </div>
 
             {selectedProject.githubUrl && (
-              <div className="pt-4 border-t border-gray-200 dark:border-gray-700 flex justify-end">
+              <div className="pt-4 border-t border-slate-200 dark:border-slate-800 flex justify-end">
                 <a
                   href={selectedProject.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gray-900 dark:bg-white text-white dark:text-gray-900 font-semibold text-sm hover:opacity-90 transition"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-semibold text-sm hover:opacity-95 transition shadow-md shadow-blue-500/20"
                 >
                   <FaGithub className="text-lg" />
                   <span>View Repository on GitHub</span>

@@ -8,7 +8,7 @@ Personal portfolio website built with **Next.js 15 (App Router)**, **React 19**,
 
 - **Responsive & Modern UI**: Sticky glassmorphism navigation, smooth fade-in transitions, and persistent Dark/Light mode (`localStorage` + system theme detection).
 - **Enterprise & Open Source Showcase**:
-  - **Featured Enterprise Projects**: *Lelang.go.id (DJKN)*, *e-LHKPN (KPK)*, and *SDP — Sistem Database Pemasyarakatan (Ditjenpas)*.
+  - **Featured Enterprise Projects**: *SISARPRAS — LRT Jakarta (IBM Maximo Integration)*, *Lelang.go.id (DJKN)*, *e-LHKPN (KPK)*, and *SDP — Sistem Database Pemasyarakatan (Ditjenpas)*.
   - **Personal & Architecture Projects**: *SmartFactory Ecosystem (Polyglot Microservices: Go, NestJS, Express)*, *SimplePay Core Wallet Engine (Java 21 & Spring Boot)*, *Midtrans Payment Gateway API (Laravel)*, *Expense Approval System*, and *E-Commerce REST API*.
 - **Interactive Project Details**: Modal popups displaying role, organization, key technical contributions, tech stack badges, and direct GitHub repository links.
 
