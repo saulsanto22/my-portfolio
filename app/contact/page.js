@@ -14,9 +14,9 @@ import {
 const contactChannels = [
   {
     name: 'WhatsApp',
-    value: '+62 882-0009-78708',
+    value: '+62 882 1054 5885',
     description: 'Fastest way to reach me for quick discussions & interviews',
-    href: 'https://wa.me/62882000978708',
+    href: 'https://wa.me/6288210545885',
     icon: <FaWhatsapp className="text-3xl text-emerald-500" />,
     badgeClass: 'hover:border-emerald-500/50'
   },
